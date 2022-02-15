@@ -16,7 +16,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore(); //  real  time database
-const auth = getAuth(); //  used to handle signing in
+const auth = getAuth(firebaseApp); //  used to handle signing in
 
 //export default auth;
 export { db, auth };

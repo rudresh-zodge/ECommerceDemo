@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useHistory } from "react-router-dom";
-import {auth} from "./firebase";
+import { auth } from "./firebase";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
   const history = useHistory();
@@ -11,27 +12,27 @@ function Login() {
   // function invocation after clicking the sign in button
   const signIn = (e) => {
     e.preventDefault();
-    /*
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
+    
+      signInWithEmailAndPassword(auth,email, password)
+      .then((res) => {
         history.push("/");
       })
       .catch((error) => alert(error.message));
-      */
+    
   };
 
   const register = (e) => {
     e.preventDefault();
-    
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
         // it successfully created a new user with email and password.Returns a auth object.
-        console.log(auth);
+        console.log(res);
+        if (res) {
+          history.push("/"); // used for navigating from component
+        }
       })
       .catch((error) => alert(error.message));
-      
   };
 
   return (
